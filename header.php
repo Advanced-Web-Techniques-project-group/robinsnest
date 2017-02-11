@@ -1,7 +1,7 @@
 <?php // Example 26-2: header.php
   session_start();
 
-  echo "<!DOCTYPE html>\n<html><head>";
+  echo "<!DOCTYPE html>\n<html ng-app='robinsNestStore'><head>";
 
   require_once 'functions.php';
 
@@ -16,29 +16,45 @@
   else $loggedin = FALSE;
 
   echo "<title>$appname$userstr</title><link rel='stylesheet' " .
-       "href='styles.css' type='text/css'>"                     .
-       "</head><body><center><canvas id='logo' width='624' "    .
-       "height='96'>$appname</canvas></center>"             .
+       "href='styles-new.css' type='text/css'>"                     .
+       "</head><body>"                 .
        "<div class='appname'>$appname$userstr</div>"            .
+       "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>" .
+       "<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>".
+       "<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js'></script>"    .
+       "<script src='main.js'></script>"                        .
+       "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>" .
        "<script src='javascript.js'></script>";
 
   if ($loggedin)
   {
-    echo "<br ><ul class='menu'>" .
+    echo "<nav class='navbar navbar-default navbar-fixed-top'>" .
+         "<div class='container'>" .
+         "<br ><ul class=''>" .
          "<li><a href='members.php?view=$user'>Home</a></li>" .
          "<li><a href='members.php'>Members</a></li>"         .
          "<li><a href='friends.php'>Friends</a></li>"         .
          "<li><a href='messages.php'>Messages</a></li>"       .
          "<li><a href='profile.php'>Edit Profile</a></li>"    .
-         "<li><a href='logout.php'>Log out</a></li></ul><br>";
+         "<li><a href='#!shop'>Store</a></li></ul><br>"   .
+         "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>" .
+        "<div class='canvas-wrap container'><canvas id='logo' width='624' "    .
+        "height='96'>$appname</canvas></div>";
   }
   else
   {
-    echo ("<br><ul class='menu'>" .
+    echo ("<nav class='navbar navbar-default navbar-fixed-top'>" .
+          "<div class='container'>" .
+          "<br><ul class='nav nav-pills'>" .
           "<li><a href='index.php'>Home</a></li>"                .
           "<li><a href='signup.php'>Sign up</a></li>"            .
-          "<li><a href='login.php'>Log in</a></li></ul><br>"     .
+          "<li><a href='login.php'>Log in</a></li>"              .
+          "<li><a href='#!shop'>Store</a></li></ul><br></div></nav>"     .
+          "<div class='container'>"  .
+          "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
+          "height='96'>$appname</canvas></div>" .
           "<span class='info'>&#8658; You must be logged in to " .
-          "view this page.</span><br><br>");
+          "view this page.</span><br><br></div>");
   }
 ?>
+

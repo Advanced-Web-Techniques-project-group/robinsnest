@@ -1,0 +1,6 @@
+.product-container .panel {
+  display: inline-block;
+  margin-right: 10px;
+}
+.canvas-wrap { position:relative; padding-top: 60px; margin-bottom: 10px;} /* Make this a positioned parent */
+.overlay     { position:absolute; top:20px; left:30px; }

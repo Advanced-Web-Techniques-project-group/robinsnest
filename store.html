@@ -1,0 +1,21 @@
+
+<div class="container">
+	<div class="text-center">
+ 		<h2>Robins Nest Store Home</h2>
+ 	</div>
+</div>
+<div class="container">
+	<div class="product-container" ng-controller='displayItemsController'>
+		<div class="panel panel-default" ng-repeat='item in items'>
+		  <div class="panel-heading"><img width="300" height="200" src="{{item.image}}"></div>
+		  <div class="panel-body">
+				<p class="item_name">{{item.name}}</p>
+				<span class="item_price">£{{item.price}}</span>
+			    <button ng-click='addToBasket(item.item_id, item.name, item.price)' class="item_add"> Add to Cart </button>
+		</div>
+	</div>
+</div>
+
+<a href="#!checkout">Checkout</a>
+
+
