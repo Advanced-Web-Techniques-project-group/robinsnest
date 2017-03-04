@@ -55,6 +55,7 @@
 
     <!-- Game-->
     <script src="Game/js/3dGame.js"></script>
+    <link rel="stylesheet" href="Game/styles/game.css">
 
 
   </div>
