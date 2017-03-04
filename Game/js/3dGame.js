@@ -109,8 +109,10 @@ function restorePreviouslyIntersectedObjectToOriginalState() {
 
 function onMouseMove(event) {
     // Update the mouse position
-    mouse.x = ( (event.clientX - renderer.domElement.offsetLeft) / renderer.domElement.width ) * 2 - 1;
-    mouse.y = - ( (event.clientY - renderer.domElement.offsetTop) / renderer.domElement.height ) * 2 + 1;
+    var x = event.offsetX == undefined ? event.layerX : event.offsetX;
+    var y = event.offsetY == undefined ? event.layerY : event.offsetY;
+    mouse.x = ( x / renderer.domElement.width ) * 2 - 1;
+    mouse.y = - ( y / renderer.domElement.height ) * 2 + 1;
     highlightIntersectedObject();
 }
 
