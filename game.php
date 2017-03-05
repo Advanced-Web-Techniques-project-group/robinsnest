@@ -55,7 +55,10 @@ if (!$loggedin) die();
     <!-- Game-->
     <script src="Game/js/3dGame.js"></script>
     <link rel="stylesheet" href="Game/styles/game.css">
-    
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css">
 </div>
 </body>
 </html>

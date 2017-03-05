@@ -29,8 +29,13 @@ function resetGame() {
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ];
     score = 0;
-    pieceSelected = null;
+    updateScoreDisplay();
     pieceScoredThisTurn = null;
+
+    // The following three lines must be in this order to properly reset the game
+    pieceSelected = null;
+    restorePreviouslyIntersectedObjectToOriginalState();
+    pieceIntersected = null;
 }
 
 init();
@@ -47,7 +52,6 @@ function init() {
     drawGamePieces();
     setUpRenderer();
 
-    container.appendChild(renderer.domElement);
     container.addEventListener('mousemove', onMouseMove, false);
     container.addEventListener('mousedown', onMouseDown, false);
     container.addEventListener('resize', onWindowResize, false);
@@ -150,12 +154,17 @@ function onMouseDown() {
         }
     }
 
-    if (gameIsOver()) {
-        alert("Game Over!");
+    if (isGameOver()) {
+        swal(
+            'Well Done!',
+            'You completed the game with ' + score + ' points!',
+            'success'
+        );
+        init();
     }
 }
 
-function gameIsOver() {
+function isGameOver() {
     for (var column = 6; column < BOARD_WIDTH; column++) {
         for (var height = 6; height < BOARD_HEIGHT; height++) {
             if (board[column][height] !== 1) {
@@ -228,6 +237,10 @@ function calculateScore(gamePiece, boardPiece) {
         }
     }
 
+    updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
     document.getElementById('score-value').innerHTML = score;
 }
 
@@ -281,9 +294,9 @@ function drawGamePieces() {
             scene.add(cylinder);
 
             // A wireframe on top of it to make it easier to see when they are bunched together
-            var geo = new THREE.EdgesGeometry( cylinder.geometry );
-            var mat = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 2 } );
-            var wireframe = new THREE.LineSegments( geo, mat );
+            var geo = new THREE.EdgesGeometry(cylinder.geometry);
+            var mat = new THREE.LineBasicMaterial({color: 0xffffff, linewidth: 2});
+            var wireframe = new THREE.LineSegments(geo, mat);
             cylinder.add(wireframe);
         }
     }
@@ -323,11 +336,15 @@ function setUpSceneAndLighting() {
 }
 
 function setUpRenderer() {
-    renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setClearColor(0xf0f0f0);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(container.clientWidth, gameWindowHeight);
-    renderer.sortObjects = false;
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFShadowMap;
+    if (renderer === null || renderer === undefined) {
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setClearColor(0xf0f0f0);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(container.clientWidth, gameWindowHeight);
+        renderer.sortObjects = false;
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFShadowMap;
+        container.appendChild(renderer.domElement);
+    }
+
 }
