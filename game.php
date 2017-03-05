@@ -8,6 +8,8 @@ if (!$loggedin) die();
 <div class='main'>
     <h3>3D Halma</h3>
 
+    <button onclick="sendScoreToServer()">Go</button>
+
     <div id="game-container"></div>
     <p id="score">Score: <span id="score-value">0</span></p>
     <div id="high-scores-container">
@@ -55,6 +57,12 @@ if (!$loggedin) die();
     <!-- Game-->
     <script src="Game/js/3dGame.js"></script>
     <link rel="stylesheet" href="Game/styles/game.css">
+
+    <!-- jQuery -->
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.js"></script>

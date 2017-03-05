@@ -155,6 +155,7 @@ function onMouseDown() {
     }
 
     if (isGameOver()) {
+        sendScoreToServer();
         swal(
             'Well Done!',
             'You completed the game with ' + score + ' points!',
@@ -162,6 +163,18 @@ function onMouseDown() {
         );
         init();
     }
+}
+
+function sendScoreToServer() {
+    $.ajax({
+        method: 'POST',
+        url: 'http://localhost/cw2/Game/AddScore.php',
+        dataType: 'json',
+        data: {
+            score: score
+        },
+        success: getHighScores()
+    });
 }
 
 function isGameOver() {
@@ -346,5 +359,8 @@ function setUpRenderer() {
         renderer.shadowMap.type = THREE.PCFShadowMap;
         container.appendChild(renderer.domElement);
     }
+}
+
+function getHighScores() {
 
 }
