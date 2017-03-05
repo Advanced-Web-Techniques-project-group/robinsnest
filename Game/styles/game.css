@@ -8,16 +8,21 @@
 }
 
 #high-scores img {
-	width: 100%;
+	width: 50px;
 	table-layout: fixed;
 }
 
-#high-scores img {
-	width: 50px;
+th {
+	text-align: left;
+}
+
+#high-scores {
+	margin-top: 20px;
 }
 
 #score {
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 .high-scores-country {

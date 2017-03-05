@@ -362,5 +362,46 @@ function setUpRenderer() {
 }
 
 function getHighScores() {
+    $.ajax({
+        url: 'http://localhost/cw2/Game/GetScores.php',
+        dataType: 'json',
+        success: updateHighScoreTable
+    });
+}
 
+function updateHighScoreTable(scoreData) {
+    // Clear table
+    $( "#high-scores" ).empty();
+
+    // Add header
+    var header =
+        `<tr>
+        <th class="high-scores-country"></th>
+        <th class="high-scores-name">Name</th>
+        <th class="high-scores-score">Score</th>
+        <th class="high-scores-date">Date</th>
+        </tr>`;
+    $( "#high-scores" ).append(header);
+
+    // Add each score
+    $.each(scoreData, function(index, highScore) {
+        $( "#high-scores" ).append(createRowFromHighScoreData(highScore));
+    })
+}
+
+function createRowFromHighScoreData(highScore) {
+    var row =
+        `<tr>
+        <td><img src="http://www.geognos.com/api/en/countries/flag/{country}.png" class="game-flag"></td>
+        <td>{name}</td>
+        <td>{score}</td>
+        <td>{date}</td>
+        </tr>`;
+
+    row = row.replace("{country}", "GR");
+    row = row.replace("{name}", "test");
+    row = row.replace("{score}", highScore.Score);
+    row = row.replace("{date}", highScore.DateCreated);
+
+    return row;
 }
