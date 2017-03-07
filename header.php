@@ -28,18 +28,19 @@
 
   if ($loggedin)
   {
-    echo "<nav class='navbar navbar-default navbar-fixed-top'>" .
-         "<div class='container'>" .
-         "<br ><ul class=''>" .
-         "<li><a href='members.php?view=$user'>Home</a></li>" .
-         "<li><a href='members.php'>Members</a></li>"         .
-         "<li><a href='friends.php'>Friends</a></li>"         .
-         "<li><a href='messages.php'>Messages</a></li>"       .
-         "<li><a href='profile.php'>Edit Profile</a></li>"    .
-         "<li><a href='#!shop'>Store</a></li></ul><br>"   .
-         "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>" .
-        "<div class='canvas-wrap container'><canvas id='logo' width='624' "    .
-        "height='96'>$appname</canvas></div>";
+    echo "<nav class='navbar navbar-default navbar-fixed-top'>"                .
+         "<div class='container'>"                                             .  
+         "<br ><ul class='nav nav-pills'>"                                                  .
+         "<li><a href='members.php?view=$user'>Home</a></li>"                  .
+         "<li><a href='members.php'>Members</a></li>"                          .
+         "<li><a href='friends.php'>Friends</a></li>"                          .
+         "<li><a href='messages.php'>Messages</a></li>"                        .
+         "<li><a href='EditProfile.php'>Edit Profile</a></li>"                 .
+         "<li><a href='store.php#!shop'>Store</a></li>"                        .
+         "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>"      .
+        "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
+          "height='96'>$appname</canvas></div>" .
+          "<div ng-view></div>";
   }
   else
   {
@@ -48,13 +49,14 @@
           "<br><ul class='nav nav-pills'>" .
           "<li><a href='index.php'>Home</a></li>"                .
           "<li><a href='signup.php'>Sign up</a></li>"            .
-          "<li><a href='login.php'>Log in</a></li>"              .
-          "<li><a href='#!shop'>Store</a></li></ul><br></div></nav>"     .
+          "<li><a href='login.html'>Log in</a></li>"              .
+          "<li><a href='store.php#!shop'>Store</a></li></ul><br></div></nav>"     .
           "<div class='container'>"  .
           "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
           "height='96'>$appname</canvas></div>" .
           "<span class='info'>&#8658; You must be logged in to " .
-          "view this page.</span><br><br></div>");
+          "view this page.</span><br><br></div>" . 
+          "<div ng-view></div>");
   }
 ?>
 
