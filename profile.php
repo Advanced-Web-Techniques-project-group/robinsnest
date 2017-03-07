@@ -1,92 +1,125 @@
-<?php // Example 26-8: profile.php
-  require_once 'header.php';
+<?php 
 
-  if (!$loggedin) die();
+session_start();
 
-  echo "<div class='main'><h3>Your Profile</h3>";
+include("includes/db_login.php");
 
-  $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
-    
-  if (isset($_POST['text']))
-  {
-    $text = sanitizeString($_POST['text']);
-    $text = preg_replace('/\s\s+/', ' ', $text);
+$user = $_SESSION["user"];
 
-    if ($result->num_rows)
-         queryMysql("UPDATE profiles SET text='$text' where user='$user'");
-    else queryMysql("INSERT INTO profiles VALUES('$user', '$text')");
-  }
-  else
-  {
-    if ($result->num_rows)
-    {
-      $row  = $result->fetch_array(MYSQLI_ASSOC);
-      $text = stripslashes($row['text']);
-    }
-    else $text = "";
-  }
+$query=mysql_query("SELECT * FROM members WHERE user='$user'");
 
-  $text = stripslashes(preg_replace('/\s\s+/', ' ', $text));
+$row=mysql_fetch_array($query);
 
-  if (isset($_FILES['image']['name']))
-  {
-    $saveto = "$user.jpg";
-    move_uploaded_file($_FILES['image']['tmp_name'], $saveto);
-    $typeok = TRUE;
 
-    switch($_FILES['image']['type'])
-    {
-      case "image/gif":   $src = imagecreatefromgif($saveto); break;
-      case "image/jpeg":  // Both regular and progressive jpegs
-      case "image/pjpeg": $src = imagecreatefromjpeg($saveto); break;
-      case "image/png":   $src = imagecreatefrompng($saveto); break;
-      default:            $typeok = FALSE; break;
-    }
 
-    if ($typeok)
-    {
-      list($w, $h) = getimagesize($saveto);
+ ?>
 
-      $max = 100;
-      $tw  = $w;
-      $th  = $h;
+<!doctype html>
 
-      if ($w > $h && $max < $w)
-      {
-        $th = $max / $w * $h;
-        $tw = $max;
-      }
-      elseif ($h > $w && $max < $h)
-      {
-        $tw = $max / $h * $w;
-        $th = $max;
-      }
-      elseif ($max < $w)
-      {
-        $tw = $th = $max;
-      }
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-      $tmp = imagecreatetruecolor($tw, $th);
-      imagecopyresampled($tmp, $src, 0, 0, 0, 0, $tw, $th, $w, $h);
-      imageconvolution($tmp, array(array(-1, -1, -1),
-        array(-1, 16, -1), array(-1, -1, -1)), 8, 0);
-      imagejpeg($tmp, $saveto);
-      imagedestroy($tmp);
-      imagedestroy($src);
-    }
-  }
+  <title>Profile</title>
 
-  showProfile($user);
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/Profile.css">
+<link rel="stylesheet" href="css/Bootstrap.css">
+ <script src="https://use.fontawesome.com/9d20d68da5.js"></script>
+</head>
 
-  echo <<<_END
-    <form method='post' action='profile.php' enctype='multipart/form-data'>
-    <h3>Enter or edit your details and/or upload an image</h3>
-    <textarea name='text' cols='50' rows='3'>$text</textarea><br>
-_END;
-?>
 
-    Image: <input type='file' name='image' size='14'>
-    <input type='submit' value='Save Profile'>
-    </form></div><br>
+<body>
+<div class="container">
+      <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+           <i class="fa fa-sign-out" aria-hidden="true"></i> <A href="#">Logout</A>
+
+       <br>
+      </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+   
+   
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title"><?php echo $_SESSION['user']?></h3>
+            </div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="//placehold.it/100" class="img-circle img-responsive"> </div>
+                
+                <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td><font color="#31708f">Address Line 1:</font></td>
+                        <td><?php 
+
+                        echo $row[6]
+
+                        ?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Address Line 2:</font></td>
+                        <td><?php echo $row[7]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Country:</font></td>
+                        <td><?php echo $row[8]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Postcode:</font></td>
+                        <td><?php echo $row[9]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Date of Birth</font></td>
+                        <td><?php echo $row[10]?></td>
+                      </tr>
+                   
+                         <tr>
+                             <tr>
+                        <td><font color="#31708f">Gender</font></td>
+                        <td><?php echo $row[5]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Email Address:</font></td>
+                        <td><?php echo $row[11]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Username:</font></td>
+                        <td><?php echo $row[1]?></td>
+                      </tr>
+                      <tr>
+                        <td><font color="#31708f">Phone Number:</font>:</td>
+                        <td><?php echo $row[12]?>
+                        </td>
+                      </tr>
+
+                           
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  
+                  <a href="#" class="btn btn-primary">View Game Highscores</a>
+                  <span class="pull-right">
+                  <a href="#" class="btn btn-primary">View Shopping Cart</a>
+                </span>
+                </div>
+              </div>
+            </div>
+                 <div class="panel-footer">
+
+
+                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a>
+                        <span class="pull-right">
+                            <a href="EditProfile.php" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile</a>
+                        </span>
+                    </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
-</html>
+  </html>

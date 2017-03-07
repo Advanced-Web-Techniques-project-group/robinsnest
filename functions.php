@@ -1,9 +1,6 @@
 <?php // Example 26-1: functions.php
-  $dbhost  = 'localhost';    // Unlikely to require changing
-  $dbname  = 'robinsnest';   // Modify these...
-  $dbuser  = 'robinsnest';   // ...variables according
-  $dbpass  = 'rnpassword';   // ...to your installation
-  $appname = "Robin's Nest"; // ...and preference
+ 
+ require_once 'includes/db_login.php';
 
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($connection->connect_error) die($connection->connect_error);
