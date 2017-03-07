@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Cart</title>
-</head>
-<body>
-<h4>cart</h4>
-
-</body>
-</html>
+<br> <br>
+<div class="container">
+	<div class="product-container" ng-controller='cartController'>
+		<div ng-repeat='item in cart'>
+			<div>{{item.name}} price:{{item.price}} <input ng-model="item.qty"></input>{{item.qty * item.price}}</div>
+		</div>
+		<div><p ng-show="total()" ng-class="{highlight: total()>100}">total:{{total() | currency:"&pound;"}}</p></div>
+	</div>
+</div>

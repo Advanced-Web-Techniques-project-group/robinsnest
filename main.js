@@ -21,14 +21,16 @@ var storeModule = angular.module('robinsNestStore', ['ngRoute']);
   $routeProvider
   .when('/checkout', {
       templateUrl: 'cart.html',
+      controller: 'cartController'
   })
   .when('/shop', {
       templateUrl: 'store.html',
+      controller: 'storeController'
   })
 }]);
 
 // Create a controller: 
-storeModule.controller('displayItemsController', 
+storeModule.controller('storeController', 
     function ($scope, Vat, $http) { 
 
         $scope.addToBasket = function (item_id, name, price) {
@@ -36,23 +38,21 @@ storeModule.controller('displayItemsController',
               if(localStorage.getItem('cart') == null)
               {
                  var cart = {};
-                 cart[item_id] = [item_id, name, price, 1];
+                 cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1};
                  localStorage.setItem('cart', JSON.stringify(cart));
              }
              else {
                  var cart = JSON.parse(localStorage.getItem('cart'));
-                 var found = false;
-                 if(cart[item_id][0] == item_id)
-                 {
-                    cart[item_id][3]++;
-                    found = true;
+
+                if(typeof(cart[item_id]) == 'undefined') {
+                //if (window['varname'] != void 0) old browsers ??
+                    cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1};
                 }
-                if(!found){
-                    cart[item_id] = [item_id, name, price, 1];
+                else {
+                    cart[item_id].qty++;
                 }
                 localStorage.setItem('cart', JSON.stringify(cart));
             }
-            console.log(localStorage.getItem('cart'));
         } else {
             console.log("sessions not supported on this browser");
         }
@@ -72,3 +72,36 @@ storeModule.controller('displayItemsController',
         return Vat.compute(total); 
     }  
 });
+
+
+// Create a controller: 
+storeModule.controller('cartController', 
+    function ($scope, Vat, $http) { 
+    $scope.cart =  JSON.parse(localStorage.getItem('cart'));
+
+    $scope.total = function(total) {
+       console.log($scope.cart);
+       var total = 0;
+       var len  = objectLength($scope.cart);
+
+       for (var key in $scope.cart) {
+           total = total + ($scope.cart[key].qty * $scope.cart[key].price);
+        }   
+       return total;
+    }  
+
+});
+
+function objectLength(obj) {
+
+    var count = 0;
+    var i;
+
+    for (i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            count++;
+        }
+    }
+    return count;
+
+}

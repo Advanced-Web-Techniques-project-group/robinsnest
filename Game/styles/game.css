@@ -1,0 +1,42 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+#game-container {
+	height: 600px;
+}
+
+#high-scores img {
+	width: 50px;
+	table-layout: fixed;
+}
+
+th {
+	text-align: left;
+}
+
+#high-scores {
+	margin-top: 20px;
+}
+
+#score {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.high-scores-country {
+	width: 10%;
+}
+
+.high-scores-name {
+	width: 40%;
+}
+
+.high-scores-score {
+	width: 25%;
+}
+
+.high-scores-date {
+	width: 25%;
+}

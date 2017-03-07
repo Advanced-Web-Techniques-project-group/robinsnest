@@ -35,6 +35,14 @@
               'user VARCHAR(16),
               text VARCHAR(4096),
               INDEX(user(6))');
+
+  createTable('scores',
+              'Id INT AUTO_INCREMENT PRIMARY KEY,
+              UserId INT NOT NULL,
+              Score INT NOT NULL,
+              Longitude double,
+              Latitude double,
+              DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
 ?>
 
     <br>...done.
