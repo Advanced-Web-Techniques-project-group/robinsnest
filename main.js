@@ -80,7 +80,6 @@ storeModule.controller('cartController',
     $scope.cart =  JSON.parse(localStorage.getItem('cart'));
 
     $scope.total = function(total) {
-       console.log($scope.cart);
        var total = 0;
        var len  = objectLength($scope.cart);
 
