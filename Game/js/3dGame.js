@@ -168,7 +168,7 @@ function onMouseDown() {
 function sendScoreToServer() {
     $.ajax({
         method: 'POST',
-        url: 'http://localhost/cw2/Game/AddScore.php',
+        url: 'game/AddScore.php',
         dataType: 'json',
         data: {
             score: score
@@ -350,7 +350,7 @@ function setUpSceneAndLighting() {
 
 function setUpRenderer() {
     if (renderer === null || renderer === undefined) {
-        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer = Detector.webgl ? new THREE.WebGLRenderer({antialias: true}) : new THREE.CanvasRenderer();
         renderer.setClearColor(0xf0f0f0);
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(container.clientWidth, gameWindowHeight);
@@ -363,7 +363,7 @@ function setUpRenderer() {
 
 function getHighScores() {
     $.ajax({
-        url: 'http://localhost/cw2/Game/GetScores.php',
+        url: 'game/GetScores.php',
         dataType: 'json',
         success: updateHighScoreTable
     });

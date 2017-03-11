@@ -22,6 +22,9 @@ if (!$loggedin) die();
 <script src="Game/js/threeJs/three.min.js"></script>
 <script src="Game/js/threeJs/DragControls.js"></script>
 <script src="Game/js/threeJs/OrbitControls.js"></script>
+<script src="Game/js/threeJs/CanvasRenderer.js"></script>
+<script src="Game/js/threeJs/Projector.js"></script>
+<script src="Game/js/threeJs/Detector.js"></script>
 
 <!-- Game-->
 <script src="Game/js/3dGame.js"></script>
