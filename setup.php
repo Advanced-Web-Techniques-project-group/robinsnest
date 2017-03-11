@@ -10,12 +10,24 @@
 <?php // Example 26-3: setup.php
   require_once 'functions.php';
 
-  createTable('members',
-              'user VARCHAR(16),
-              pass VARCHAR(16),
-              INDEX(user(6))');
+createTable ('members',
+    'UserID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user  varchar(16) NOT NULL,
+    pass varchar(16) NOT NULL,
+    FirstName varchar(45) DEFAULT NULL,
+    LastName varchar(45) DEFAULT NULL,
+    Gender varchar(45) DEFAULT NULL,
+    AddressLine1 varchar(45) DEFAULT NULL,
+    AddressLine2 varchar(45) DEFAULT NULL,
+    Country varchar(45) DEFAULT NULL,
+    Postcode varchar(9) DEFAULT NULL,
+    DateofBirth varchar(11) DEFAULT NULL,
+    Email varchar(45) DEFAULT NULL,
+    PhoneNumber varchar(11) DEFAULT NULL,
+    Longitude double DEFAULT NULL,
+    Latitude double DEFAULT NULL');
 
-  createTable('messages', 
+  createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
               auth VARCHAR(16),
               recip VARCHAR(16),
@@ -43,23 +55,6 @@
               Longitude double,
               Latitude double,
               DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
-
-  createTable ('members',
-  'UserID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user  varchar(16) NOT NULL,
-  pass varchar(16) NOT NULL,
-  FirstName varchar(45) DEFAULT NULL,
-  LastName varchar(45) DEFAULT NULL,
-  Gender varchar(45) DEFAULT NULL,
-  AddressLine1 varchar(45) DEFAULT NULL,
-  AddressLine2 varchar(45) DEFAULT NULL,
-  Country varchar(45) DEFAULT NULL,
-  Postcode varchar(9) DEFAULT NULL,
-  DateofBirth varchar(11) DEFAULT NULL,
-  Email varchar(45) DEFAULT NULL,
-  PhoneNumber varchar(11) DEFAULT NULL,
-  Longitude double DEFAULT NULL,
-  Latitude double DEFAULT NULL');
 
   createTable('items',
   'item_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
