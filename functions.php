@@ -2,9 +2,6 @@
  
  require_once 'includes/db_login.php';
 
-  $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-  if ($connection->connect_error) die($connection->connect_error);
-
   function createTable($name, $query)
   {
     queryMysql("CREATE TABLE IF NOT EXISTS $name($query)");
@@ -13,9 +10,9 @@
 
   function queryMysql($query)
   {
-    global $connection;
-    $result = $connection->query($query);
-    if (!$result) die($connection->error);
+      global $conn;
+    $result = $conn->query($query);
+    if (!$result) die($conn->error);
     return $result;
   }
 
@@ -31,11 +28,11 @@
 
   function sanitizeString($var)
   {
-    global $connection;
+      global $conn;
     $var = strip_tags($var);
     $var = htmlentities($var);
     $var = stripslashes($var);
-    return $connection->real_escape_string($var);
+    return $conn->real_escape_string($var);
   }
 
   function showProfile($user)

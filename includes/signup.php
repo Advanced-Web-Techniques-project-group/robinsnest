@@ -24,28 +24,19 @@ $last = sanitizeString($_POST['lastName']);
 $email = sanitizeString($_POST['email']);
 $gender = sanitizeString($_POST['gender']);
 
-$result = "SELECT * FROM members WHERE user='$user'";
+$query = "SELECT * FROM members WHERE user='$user'";
 
-if (!mysql_query($result))
-
-{
-  die('Error: ' . mysql_error());
-}
+$result = queryMysql($query);
 
 if ($result->num_rows)
   $error = "That username already exists<br><br>";
 else
 {
   $sql = "INSERT INTO members (user, pass, FirstName, LastName, Gender, Email) VALUES ('$user', '$pass', '$first', '$last' , '$gender', '$email')";
-
-  if (!mysql_query($sql))
-
-  {
-    die('Error: ' . mysql_error());
-  }
+    $result = queryMysql($sql);
 
         //Head to Profile Page
-  die("<h4>Account created</h4><a href='../login.html'>Please Log in</a><br><br>");
+  echo ("<h4>Account created</h4><a href='../login.html'>Please Log in</a><br><br>");
 
 }
 

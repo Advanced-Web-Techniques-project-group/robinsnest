@@ -5,6 +5,6 @@
   $dbpass  = '8b4ED&g8';   // ...to your installation
   $appname = "Robin's Nest"; // ...and preference
 
-$conn = mysql_connect($dbhost, $dbuser, $dbpass) or die ("MySQL connection failied");
-mysql_select_db("$dbname") or die ("No such Database");
+$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+if ($conn->connect_error) die($conn->connect_error);
 ?>

@@ -9,15 +9,14 @@ require_once '../functions.php';
     $_SESSION['user'] = $_POST['user'];
     $_SESSION['pass'] = $_POST['pass'];
 
-    $query=mysql_query("SELECT * FROM members WHERE user='$_SESSION[user]' && pass='$_SESSION[pass]'");
+    $result = queryMysql("SELECT * FROM members WHERE user='$_SESSION[user]' && pass='$_SESSION[pass]'");
 
-    $count=mysql_num_rows($query);
-    
+    $count = $result->num_rows;
 
     if ($count==1){
 
     	//Run code to get all details from database for the user
-    	$row=mysql_fetch_array($query);
+        $row = $result->fetch_array(MYSQLI_NUM);
 
         //UserID
         $_SESSION['UserID'] = $row[0];
@@ -56,8 +55,5 @@ require_once '../functions.php';
     	echo("Incorrect Details");
 
     }
-
-
-
 
 ?>
