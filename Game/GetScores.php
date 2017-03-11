@@ -1,7 +1,9 @@
 <?php
 require_once '../functions.php';
 
-$result = queryMysql('SELECT * FROM scores oRDER BY score LIMIT 10');
+$sql = "select concat(m.FirstName, ' ', m.LastName) as 'Name', s.Score, s.DateCreated, m.Country from scores s inner join members m on s.UserId = m.UserId";
+
+$result = queryMysql($sql);
 
 $rows = array();
 

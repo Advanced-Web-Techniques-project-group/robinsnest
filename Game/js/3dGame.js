@@ -392,14 +392,22 @@ function updateHighScoreTable(scoreData) {
 function createRowFromHighScoreData(highScore) {
     var row =
         `<tr>
-        <td><img src="http://www.geognos.com/api/en/countries/flag/{country}.png" class="game-flag"></td>
+        <td>{flagString}</td>
         <td>{name}</td>
         <td>{score}</td>
         <td>{date}</td>
         </tr>`;
 
-    row = row.replace("{country}", "GR");
-    row = row.replace("{name}", "test");
+    var flagString = '<img src="http://www.geognos.com/api/en/countries/flag/{country}.png" class="game-flag">';
+
+    if (highScore.Country != null) {
+        row = row.replace("{flagString}", flagString);
+        row = row.replace("{country}", highScore.Country);
+    } else {
+        row = row.replace("{flagString}", "");
+    }
+
+    row = row.replace("{name}", highScore.Name);
     row = row.replace("{score}", highScore.Score);
     row = row.replace("{date}", highScore.DateCreated);
 
