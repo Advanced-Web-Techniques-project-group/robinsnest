@@ -44,7 +44,7 @@
               Latitude double,
               DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
-  createTable (`members`,
+  createTable ('members',
   'UserID int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user  varchar(16) NOT NULL,
   pass varchar(16) NOT NULL,
@@ -61,7 +61,7 @@
   Longitude double DEFAULT NULL,
   Latitude double DEFAULT NULL');
 
-  createTable(`items`,
+  createTable('items',
   'item_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name varchar(45) DEFAULT NULL,
   price decimal(11,0) DEFAULT NULL,
