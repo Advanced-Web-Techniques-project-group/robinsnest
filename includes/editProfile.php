@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'db_login.php';
+require_once '../functions.php';
 
 
 $user = $_SESSION["user"];
@@ -34,29 +34,12 @@ $sql= "UPDATE members SET user=IF(LENGTH('$_SESSION[Newuser]')=0, user, '$_SESSI
 
 						    PhoneNumber=IF(LENGTH('$_SESSION[Phone]')=0, PhoneNumber, '$_SESSION[Phone]') WHERE user='$user'";
 
-if (!mysql_query($sql))
+queryMysql($sql);
 
-{
-	die('Error: ' . mysql_error());
+echo("Complete");
+
+if ($_POST['Newuser'] != "") {
+    $_SESSION['user'] = $_POST['Newuser'];
 }
-else
-{
-	echo("Complete");
-
-	if($_POST['Newuser'] != ""){
-
-	$_SESSION['user'] = $_POST['Newuser'];
-}
-else
-{
-	$_SESSION['user'] == $_SESSION['user'];
-}
-
-
-
-}
-
-
-
 
 ?>
