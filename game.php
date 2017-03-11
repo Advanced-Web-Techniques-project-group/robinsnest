@@ -38,7 +38,7 @@ if (!$loggedin) die();
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.4.2/sweetalert2.min.css">
 
 <script>
-    $( document ).ready(function() {
+    $(document).ready(function () {
         getHighScores();
     });
 </script>

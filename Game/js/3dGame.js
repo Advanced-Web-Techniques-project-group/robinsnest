@@ -116,7 +116,7 @@ function onMouseMove(event) {
     var x = event.offsetX == undefined ? event.layerX : event.offsetX;
     var y = event.offsetY == undefined ? event.layerY : event.offsetY;
     mouse.x = ( x / renderer.domElement.width ) * 2 - 1;
-    mouse.y = - ( y / renderer.domElement.height ) * 2 + 1;
+    mouse.y = -( y / renderer.domElement.height ) * 2 + 1;
     highlightIntersectedObject();
 }
 
@@ -371,7 +371,7 @@ function getHighScores() {
 
 function updateHighScoreTable(scoreData) {
     // Clear table
-    $( "#high-scores" ).empty();
+    $("#high-scores").empty();
 
     // Add header
     var header =
@@ -381,11 +381,11 @@ function updateHighScoreTable(scoreData) {
         <th class="high-scores-score">Score</th>
         <th class="high-scores-date">Date</th>
         </tr>`;
-    $( "#high-scores" ).append(header);
+    $("#high-scores").append(header);
 
     // Add each score
-    $.each(scoreData, function(index, highScore) {
-        $( "#high-scores" ).append(createRowFromHighScoreData(highScore));
+    $.each(scoreData, function (index, highScore) {
+        $("#high-scores").append(createRowFromHighScoreData(highScore));
     })
 }
 

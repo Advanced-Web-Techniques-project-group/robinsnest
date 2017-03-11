@@ -7,7 +7,7 @@ $result = queryMysql($sql);
 
 $rows = array();
 
-while($row = $result->fetch_assoc()){
+while ($row = $result->fetch_assoc()) {
     $rows[] = $row;
 }
 
