@@ -48,7 +48,7 @@
           "<div class='container'>" .
           "<br><ul class='nav nav-pills'>" .
           "<li><a href='index.php'>Home</a></li>"                .
-          "<li><a href='signup.php'>Sign up</a></li>"            .
+          "<li><a href='register.html'>Sign up</a></li>"            .
           "<li><a href='login.html'>Log in</a></li>"              .
           "<li><a href='store.php#!shop'>Store</a></li></ul><br></div></nav>"     .
           "<div class='container'>"  .
