@@ -39,8 +39,7 @@
          "<li><a href='store.php#!shop'>Store</a></li>"                        .
          "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>"      .
         "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
-          "height='96'>$appname</canvas></div>" .
-          "<div ng-view></div>";
+          "height='96'>$appname</canvas></div>" ;
   }
   else
   {
@@ -55,8 +54,6 @@
           "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
           "height='96'>$appname</canvas></div>" .
           "<span class='info'>&#8658; You must be logged in to " .
-          "view this page.</span><br><br></div>" . 
-          "<div ng-view></div>");
+          "view this page.</span><br><br></div>" );
   }
 ?>
-
