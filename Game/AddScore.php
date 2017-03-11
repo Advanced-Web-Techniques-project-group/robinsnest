@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (isset($_SESSION['user'])) {
-    $user = $_SESSION['user'];
+if (isset($_SESSION['UserID'])) {
+    $userId = $_SESSION['UserID'];
 } else {
     die('Not logged in');
 }
@@ -16,4 +16,6 @@ if (isset($_POST['score']) && $_POST['score'] > 10) {
 
 require_once '../functions.php';
 
-queryMysql('INSERT INTO scores (UserId, Score, Longitude, Latitude) VALUES (1, ' . $score . ', '. 1.1111 . ', ' . 1.1111 . ')');
+$sql = "INSERT INTO scores (UserId, Score) VALUES ('$userId', '$score')";
+
+queryMysql($sql);
