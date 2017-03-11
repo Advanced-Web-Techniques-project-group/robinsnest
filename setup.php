@@ -49,11 +49,9 @@ createTable ('members',
               INDEX(user(6))');
 
   createTable('scores',
-              'Id INT AUTO_INCREMENT PRIMARY KEY,
-              UserId INT NOT NULL,
+              'Id INT AUTO_INCREMENT PRIMARY KEY, 
+              UserId INT NOT NULL, CONSTRAINT Constraint_Scores_User_Id FOREIGN KEY (UserId) REFERENCES members(UserId),
               Score INT NOT NULL,
-              Longitude double,
-              Latitude double,
               DateCreated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
 
   createTable('items',
