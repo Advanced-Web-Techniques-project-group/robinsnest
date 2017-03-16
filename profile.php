@@ -102,9 +102,9 @@ $row=mysqli_fetch_array($query,MYSQLI_NUM);
                     </tbody>
                   </table>
                   
-                  <a href="#" class="btn btn-primary">View Game Highscores</a>
+                  <a href="game.php" class="btn btn-primary">View Game Highscores</a>
                   <span class="pull-right">
-                  <a href="#" class="btn btn-primary">View Shopping Cart</a>
+                  <a href="store.php#!/checkout" class="btn btn-primary">View Shopping Cart</a>
                 </span>
                 </div>
               </div>
