@@ -23,7 +23,7 @@ $pass = sanitizeString($_POST['password']);
 $first = sanitizeString($_POST['firstName']);
 $last = sanitizeString($_POST['lastName']);
 $email = sanitizeString($_POST['email']);
-$country = sanitizeString($_POST['Country']);
+$country = sanitizeString($_POST['country']);
 $gender = sanitizeString($_POST['gender']);
 
 $query = "SELECT * FROM members WHERE user='$user'";
