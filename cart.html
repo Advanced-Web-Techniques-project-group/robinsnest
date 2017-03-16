@@ -1,9 +1,84 @@
 <br> <br>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
-	<div class="product-container" ng-controller='cartController'>
-		<div ng-repeat='item in cart'>
-			<div>{{item.name}} price:{{item.price}} <input ng-model="item.qty"></input>{{item.qty * item.price}}</div>
-		</div>
-		<div><p ng-show="total()" ng-class="{highlight: total()>100}">total:{{total() | currency:"&pound;"}}</p></div>
-	</div>
+	<table id="cart" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:50%">Product</th>
+							<th style="width:10%">Price</th>
+							<th style="width:8%">Quantity</th>
+							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody ng-repeat='item in cart'>
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+									<div class="col-sm-2 hidden-xs"><img src="{{item.image}}" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-10">
+										<h4 class="nomargin">{{item.name}}</h4>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price">{{item.price}}</td>
+							<td data-th="Quantity">
+								<input type="number" class="form-control text-center" ng-model="item.qty">
+							</td>
+							<td data-th="Subtotal" class="text-center">{{item.qty * item.price}}</td>
+							<td class="actions" data-th="">
+								<button ng-click="removeFromBasket(item.item_id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>						
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr class="visible-xs">
+							<td class="text-center"><strong>Total {{total() | currency:"&pound;"}}</strong></td>
+						</tr>
+						<tr>
+							<td><a href="store.php#!shop" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							<td colspan="2" class="hidden-xs"></td>
+							<td class="hidden-xs text-center"><strong>Total {{total() | currency:"&pound;"}}</strong></td>
+							<td><a id='checkout' class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+						</tr>
+					</tfoot>
+				</table>
 </div>
+
+<div class="modal fade" id="message-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Robins Nest Store</h4>
+      </div>
+      <div class="modal-body">
+        <p id="message"></p>
+      </div>
+      <div class="modal-footer">
+        <button id="close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  $( "#checkout" ).click(function() {
+  	  var cart = JSON.parse(localStorage.getItem('cart'));
+      $.post( "orders.php", { total: 'test', order:cart})
+      .done(function( data ) {
+      	$('#message').text(data);
+      	$('#message-modal').modal('show');
+      	if(data != "Please Login To complete the order")
+      	{
+      		localStorage.clear();
+      	}
+      });
+  });
+  $( "#close" ).click(function() {
+   		location.reload();
+  });
+});
+</script>

@@ -11,11 +11,9 @@
 		  <div class="panel-body">
 				<p class="item_name">{{item.name}}</p>
 				<span class="item_price">£{{item.price}}</span>
-			    <button ng-click='addToBasket(item.item_id, item.name, item.price)' class="item_add"> Add to Cart </button>
+			    <button ng-click='addToBasket(item.item_id, item.name, item.price, item.image)' class="item_add"> Add to Cart </button>
 		</div>
 	</div>
 </div>
 
-<a href="#!checkout">Checkout</a>
-
-
+<a href="#!checkout">View Cart</a>

@@ -33,12 +33,12 @@ var storeModule = angular.module('robinsNestStore', ['ngRoute']);
 storeModule.controller('storeController', 
     function ($scope, Vat, $http) { 
 
-        $scope.addToBasket = function (item_id, name, price) {
+        $scope.addToBasket = function (item_id, name, price, image) {
            if (typeof(Storage) !== "undefined") {
               if(localStorage.getItem('cart') == null)
               {
                  var cart = {};
-                 cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1};
+                 cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1, 'image':image};
                  localStorage.setItem('cart', JSON.stringify(cart));
              }
              else {
@@ -46,7 +46,7 @@ storeModule.controller('storeController',
 
                 if(typeof(cart[item_id]) == 'undefined') {
                 //if (window['varname'] != void 0) old browsers ??
-                    cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1};
+                    cart[item_id] = {'item_id':item_id, 'name':name, 'price':price, 'qty':1, 'image':image};
                 }
                 else {
                     cart[item_id].qty++;
@@ -58,7 +58,6 @@ storeModule.controller('storeController',
         }
 
     };
-
 
     $http.get('items.php').
     then(function onSuccess(data, status, headers, config) {
@@ -87,7 +86,20 @@ storeModule.controller('cartController',
            total = total + ($scope.cart[key].qty * $scope.cart[key].price);
         }   
        return total;
-    }  
+    }
+
+    $scope.removeFromBasket = function (item_id) {
+      console.log($scope.cart);
+        for (var key in $scope.cart) {
+
+          if ($scope.cart[key].item_id == item_id)
+          {
+            delete $scope.cart[key]
+          }
+
+        }
+        localStorage.setItem('cart', JSON.stringify($scope.cart));
+    };
 
 });
 
