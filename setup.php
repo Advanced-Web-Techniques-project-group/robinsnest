@@ -25,7 +25,7 @@ createTable ('members',
     Email varchar(45) DEFAULT NULL,
     PhoneNumber varchar(11) DEFAULT NULL,
     Longitude double DEFAULT NULL,
-    Latitude double DEFAULT NULL');
+    Latitude double DEFAULT NULL,
 
   createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
