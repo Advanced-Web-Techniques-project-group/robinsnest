@@ -1,7 +1,7 @@
 <?php
 require_once '../functions.php';
 
-$sql = "select concat(m.FirstName, ' ', m.LastName) as 'Name', s.Score, s.DateCreated, m.Country from scores s inner join members m on s.UserId = m.UserId";
+$sql = "select concat(m.FirstName, ' ', m.LastName) as 'Name', s.Score, s.DateCreated, m.Country from scores s inner join members m on s.UserId = m.UserId ORDER BY s.Score ASC LIMIT 10";
 
 $result = queryMysql($sql);
 
