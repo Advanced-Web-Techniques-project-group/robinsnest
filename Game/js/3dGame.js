@@ -1,7 +1,6 @@
 const BOARD_WIDTH = 9;
 const BOARD_HEIGHT = 9;
 const COLOUR_HIGHLIGHTED_PIECE = 0xffff00;
-const COLOUR_GAME_PIECE = 0xF44336;
 const SIZE_TILE = 12;
 const TYPE_BOARD_PIECE = "board-piece";
 const TYPE_GAME_PIECE = "game-piece";
@@ -14,6 +13,7 @@ var mouse = new THREE.Vector2();
 var pieceIntersected, pieceSelected, pieceScoredThisTurn;
 var raycaster = new THREE.Raycaster();
 var score;
+var colorGamePiece = 0xF44336;
 
 
 function resetGame() {
@@ -38,11 +38,10 @@ function resetGame() {
     pieceIntersected = null;
 }
 
-init();
-animate();
-
-function init() {
+function init(color) {
     container = document.getElementById('game-container');
+
+    colorGamePiece = color;
 
     resetGame();
     setUpSceneAndLighting();
@@ -133,7 +132,7 @@ function onMouseDown() {
         if (pieceIntersected.type === TYPE_GAME_PIECE) {
             // Restore previously selected piece's colour
             if (pieceSelected !== null) {
-                pieceSelected.material.color.setHex(COLOUR_GAME_PIECE);
+                pieceSelected.material.color = new THREE.Color(colorGamePiece);
             }
 
             // Update the new piece
@@ -161,7 +160,7 @@ function onMouseDown() {
             'You completed the game with ' + score + ' points!',
             'success'
         );
-        init();
+        init(colorGamePiece);
     }
 }
 
@@ -295,7 +294,7 @@ function drawGamePieces() {
         for (var width = 0; width < 3; width++) {
 
             // The cylindrical game piece
-            var cylinder = new THREE.Mesh(gamePiece, new THREE.MeshBasicMaterial({color: COLOUR_GAME_PIECE}));
+            var cylinder = new THREE.Mesh(gamePiece, new THREE.MeshBasicMaterial({color: colorGamePiece}));
             cylinder.position.x = width * SIZE_TILE;
             cylinder.position.y = SIZE_TILE;
             cylinder.position.z = height * SIZE_TILE;

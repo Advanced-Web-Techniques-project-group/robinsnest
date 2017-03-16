@@ -2,6 +2,16 @@
 require_once 'header.php';
 
 if (!$loggedin) die();
+$userId = $_SESSION['UserID'];
+
+$result = queryMysql("select GameColor from members m WHERE m.UserId = $userId");
+
+$row = $result->fetch_assoc();
+
+$colour = $row['GameColor'];
+if ($colour == '0')  {
+    $colour = 'seagreen';
+}
 ?>
 
 <div class='main'>
@@ -44,6 +54,10 @@ if (!$loggedin) die();
     $(document).ready(function () {
         getHighScores();
     });
+
+    // Start the game
+    init('<?php echo $colour; ?>');
+    animate();
 </script>
 
 </body>
