@@ -26,6 +26,7 @@ createTable ('members',
     PhoneNumber varchar(11) DEFAULT NULL,
     Longitude double DEFAULT NULL,
     Latitude double DEFAULT NULL,
+    LastInserted DATETIME DEFAULT CURRENT_TIMESTAMP');
 
   createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
