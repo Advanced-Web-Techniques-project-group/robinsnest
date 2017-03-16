@@ -1,16 +1,15 @@
 <?php 
 
-include("header.php");
-
 session_start();
 
-include("includes/db_login.php");
+include("header.php");
+
 
 $user = $_SESSION["user"];
 
-$query=mysql_query("SELECT * FROM members WHERE user='$user'");
+$query=queryMysql("SELECT * FROM members WHERE user='$user'");
 
-$row=mysql_fetch_array($query);
+$row=mysqli_fetch_array($query,MYSQLI_NUM);
 
 
 
