@@ -168,7 +168,6 @@ function sendScoreToServer() {
     $.ajax({
         method: 'POST',
         url: 'game/AddScore.php',
-        dataType: 'json',
         data: {
             score: score
         },
