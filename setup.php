@@ -75,7 +75,7 @@ createTable ('members',
   createTable('colors',
   'item_id int(11) NOT NULL,
   color_code varchar(45) DEFAULT NULL,
-  color_name`varchar(45) DEFAULT NULL');
+  color_name varchar(45) DEFAULT NULL');
 
 ?>
 
