@@ -1,5 +1,7 @@
 <?php 
 
+include("header.php");
+
 session_start();
 
 include("includes/db_login.php");
