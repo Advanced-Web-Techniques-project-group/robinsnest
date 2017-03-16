@@ -38,6 +38,8 @@
          "<li><a href='messages.php'>Messages</a></li>"                        .
          "<li><a href='EditProfile.php'>Edit Profile</a></li>"                 .
          "<li><a href='store.php#!shop'>Store</a></li>"                        .
+         "<li><a href='location.php'>Location</a></li>"                        .
+          "<li><a href='profile.php'>Profile</a></li>"               .
         "<li><a href='game.php'>Halma</a></li>"                                 .
          "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>"      .
         "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
