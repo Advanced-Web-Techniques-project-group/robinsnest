@@ -38,6 +38,7 @@
          "<li><a href='messages.php'>Messages</a></li>"                        .
          "<li><a href='EditProfile.php'>Edit Profile</a></li>"                 .
          "<li><a href='store.php#!shop'>Store</a></li>"                        .
+        "<li><a href='game.php'>Halma</a></li>"                                 .
          "<li><a href='logout.php'>Log out</a></li></ul><br></div></nav>"      .
         "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
           "height='96'>$appname</canvas></div>" ;
@@ -51,6 +52,7 @@
           "<li><a href='register.html'>Sign up</a></li>"            .
           "<li><a href='login.html'>Log in</a></li>"              .
           "<li><a href='store.php#!shop'>Store</a></li></ul><br></div></nav>"     .
+        "<li><a href='game.php'>Halma</a></li>"                                 .
           "<div class='container'>"  .
           "<div class='canvas-wrap'><canvas id='logo' width='624' "    .
           "height='96'>$appname</canvas></div>" .
