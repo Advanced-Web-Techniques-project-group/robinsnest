@@ -60,20 +60,15 @@ createTable ('members',
   price decimal(11,0) DEFAULT NULL,
   image varchar(45) DEFAULT NULL');
 
-  CcreateTable('order_line',
-  'order_id int(11) NOT NULL DEFAULT 0,
+  createTable('order_line',
+  'order_id int(11) NOT NULL DEFAULT 0 PRIMARY KEY, 
   qty  varchar(45) DEFAULT NULL,
-  item_id varchar(45) NOT NULL DEFAULT,
-  PRIMARY KEY (order_id, item_id)
-  ENGINE=InnoDB DEFAULT CHARSET=utf8');
+  item_id varchar(45) NOT NULL');
 
   createTable('orders',
-  'order_id int(11) NOT NULL AUTO_INCREMENT,
+  'order_id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   total varchar(45) DEFAULT NULL,
-  user_id varchar(45) DEFAULT NULL,
-  PRIMARY KEY (order_id),
-  UNIQUE KEY order_id_UNIQUE (order_id)
-  ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8');
+  user_id varchar(45) DEFAULT NULL');
 
 
 
