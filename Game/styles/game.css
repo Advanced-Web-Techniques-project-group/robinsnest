@@ -16,6 +16,12 @@ th {
 	text-align: left;
 }
 
+#high-scores-container {
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 #high-scores {
 	margin-top: 20px;
 }
@@ -27,16 +33,24 @@ th {
 
 .high-scores-country {
 	width: 10%;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 .high-scores-name {
-	width: 40%;
+	width: 30%;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 .high-scores-score {
 	width: 25%;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 .high-scores-date {
-	width: 25%;
+	width: 35%;
+	padding-left: 2px;
+	padding-right: 2px;
 }

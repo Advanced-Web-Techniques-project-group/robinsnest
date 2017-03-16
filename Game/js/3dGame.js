@@ -392,10 +392,10 @@ function updateHighScoreTable(scoreData) {
 function createRowFromHighScoreData(highScore) {
     var row =
         `<tr>
-        <td>{flagString}</td>
-        <td>{name}</td>
-        <td>{score}</td>
-        <td>{date}</td>
+        <td class="high-scores-country">{flagString}</td>
+        <td class="high-scores-name">{name}</td>
+        <td class="high-scores-score">{score}</td>
+        <td class="high-scores-date">{date}</td>
         </tr>`;
 
     var flagString = '<img src="http://www.geognos.com/api/en/countries/flag/{country}.png" class="game-flag">';
