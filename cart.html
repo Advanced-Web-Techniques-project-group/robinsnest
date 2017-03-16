@@ -39,6 +39,7 @@
 							<td><a href="store.php#!shop" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong>Total {{total() | currency:"&pound;"}}</strong></td>
+							<input id='total' type="hidden" value="{{total()}}">
 							<td><a id='checkout' class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
 						</tr>
 					</tfoot>
@@ -66,8 +67,9 @@
 <script type="text/javascript">
 $( document ).ready(function() {
   $( "#checkout" ).click(function() {
+  	  var total = $( "#total" ).val();
   	  var cart = JSON.parse(localStorage.getItem('cart'));
-      $.post( "orders.php", { total: 'test', order:cart})
+      $.post( "orders.php", { total: total, order:cart})
       .done(function( data ) {
       	$('#message').text(data);
       	$('#message-modal').modal('show');
