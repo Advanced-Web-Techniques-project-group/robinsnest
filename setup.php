@@ -26,7 +26,8 @@ createTable ('members',
     PhoneNumber varchar(11) DEFAULT NULL,
     Longitude double DEFAULT NULL,
     Latitude double DEFAULT NULL,
-    LastInserted DATETIME DEFAULT CURRENT_TIMESTAMP');
+    LastInserted DATETIME DEFAULT CURRENT_TIMESTAMP,
+    GameColor varchar(45) DEFAULT 0');
 
   createTable('messages',
               'id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +72,10 @@ createTable ('members',
   total varchar(45) DEFAULT NULL,
   user_id varchar(45) DEFAULT NULL');
 
-
+  createTable('colors',
+  'item_id int(11) NOT NULL,
+  color_code varchar(45) DEFAULT NULL,
+  color_name`varchar(45) DEFAULT NULL');
 
 ?>
 

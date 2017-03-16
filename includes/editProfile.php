@@ -15,6 +15,7 @@ $_SESSION['Postcode'] = $_POST['postcode'];
 $_SESSION['Phone'] = $_POST['phone'];
 $_SESSION['DOB'] = $_POST['DOB'];
 $_SESSION['Email'] = $_POST['email'];
+$_SESSION['gameColor'] = $_POST['gameColor'];
 $_SESSION['Newuser'] = $_POST['Newuser']; //look how to display this on profile page ( write code to get direcly from database on profile page)
 $_SESSION['pass'] = $_POST['pass'];
 
@@ -31,6 +32,7 @@ $sql= "UPDATE members SET user=IF(LENGTH('$_SESSION[Newuser]')=0, user, '$_SESSI
 							Postcode=IF(LENGTH('$_SESSION[Postcode]')=0, Postcode, '$_SESSION[Postcode]'),		
 							DateofBirth=IF(LENGTH('$_SESSION[DOB]')=0, DateofBirth, '$_SESSION[DOB]'),
 						    Email=IF(LENGTH('$_SESSION[Email]')=0, Email, '$_SESSION[Email]'),
+						    GameColor=IF(LENGTH('$_POST[gameColor]')=0, GameColor, '$_POST[gameColor]'),
 
 						    PhoneNumber=IF(LENGTH('$_SESSION[Phone]')=0, PhoneNumber, '$_SESSION[Phone]') WHERE user='$user'";
 

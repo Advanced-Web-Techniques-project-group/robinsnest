@@ -375,6 +375,14 @@ include("header.php");
             </div>
           </div>
           <div class="form-group">
+            <label class="col-lg-3 control-label">Game Color:</label>
+            <div class="col-lg-8">
+
+              <select id="gameColor" name="gameColor">
+                <option value="#ecf0f1">Default</option>
+              </select>
+            </div>
+          <div class="form-group">
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
               <input type="submit" class="btn btn-primary" value="Save Changes">
@@ -389,15 +397,20 @@ include("header.php");
   <hr>
 
 
-
-
-
-
-
   <!-- Include all compiled plugins (below), or include individual files as needed -->
 
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
   <script src="js/ProfileValidation.js"></script>
+
+  <script type="text/javascript">
+        $.get( "GameProfileColors.php")
+          .done(function( data ) {
+            var game_colors = JSON.parse(data);
+            $.each(game_colors, function(item) {
+                $('#gameColor').append($("<option />").val(this.color_code).text(this.color_name));
+            });
+        });
+  </script>
 </body>
 </html>
