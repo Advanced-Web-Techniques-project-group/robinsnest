@@ -67,20 +67,53 @@
 <script type="text/javascript">
 $( document ).ready(function() {
   $( "#checkout" ).click(function() {
-  	  var total = $( "#total" ).val();
-  	  var cart = JSON.parse(localStorage.getItem('cart'));
-      $.post( "orders.php", { total: total, order:cart})
-      .done(function( data ) {
-      	$('#message').text(data);
-      	$('#message-modal').modal('show');
-      	if(data != "Please Login To complete the order")
-      	{
-      		localStorage.clear();
-      	}
-      });
+
+  		$.get( "GameProfileColors.php")
+          .done(function( Colordata ) {
+          var boughtColors = JSON.parse(Colordata);
+	  	  var total = $( "#total" ).val();
+	  	  var cart = JSON.parse(localStorage.getItem('cart'));
+	  	  var msg = "";
+	  	  $.each(cart, function(Cartitem) {
+	  	  		if(isItemIdInArray(boughtColors, cart[Cartitem].item_id)) {
+	  	  			msg = msg + "You've already bought " + cart[Cartitem].name + " please remove from you basket to continue <br>"
+	  	  		}
+	  	  		if(cart[Cartitem].qty > 1) {
+	  	  				msg = msg + "You have more than one " + cart[Cartitem].name + " in you cart <br>";
+	  	  				
+	  	  		}
+		  });
+		  if (msg != ""){
+		  	showModal(msg)
+		  }
+		  else {
+		      $.post( "orders.php", { total: total, order:cart})
+		      .done(function( data ) {
+		      	showModal(data);
+		      	if(data != "Please Login To complete the order")
+		      	{
+		      		localStorage.clear();
+		      	}
+		      });
+			}
+	    });
   });
+
   $( "#close" ).click(function() {
    		location.reload();
   });
+
+  function showModal(text){
+  		$('#message').html(text);
+	    $('#message-modal').modal('show');
+  }
+  function isItemIdInArray(array, item){
+  	for(var i = 0; i < array.length; i++) {
+  		if(array[i].item_id == item) {
+  			return true;
+  		}
+  	}
+  	return false;
+  }
 });
 </script>
