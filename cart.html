@@ -23,7 +23,8 @@
 							</td>
 							<td data-th="Price">{{item.price}}</td>
 							<td data-th="Quantity">
-								<input type="number" class="form-control text-center" ng-model="item.qty">
+								<input type="number" class="form-control text-center item-qty" ng-model="item.qty">
+								<input id='item-id' type="hidden" value="{{item.item_id}}">
 							</td>
 							<td data-th="Subtotal" class="text-center">{{item.qty * item.price}}</td>
 							<td class="actions" data-th="">
@@ -66,47 +67,71 @@
 
 <script type="text/javascript">
 $( document ).ready(function() {
-  $( "#checkout" ).click(function() {
+	$( "#checkout" ).click(function() {
+		$.get( "GameProfileColors.php") //gets a list of colors bought by the user
+		.done(function( AllColordata ) {
 
-  		$.get( "GameProfileColors.php")
-          .done(function( Colordata ) {
-          var boughtColors = JSON.parse(Colordata);
-	  	  var total = $( "#total" ).val();
-	  	  var cart = JSON.parse(localStorage.getItem('cart'));
-	  	  var msg = "";
-	  	  $.each(cart, function(Cartitem) {
-	  	  		if(isItemIdInArray(boughtColors, cart[Cartitem].item_id)) {
-	  	  			msg = msg + "You've already bought " + cart[Cartitem].name + " please remove from you basket to continue <br>"
-	  	  		}
-	  	  		if(cart[Cartitem].qty > 1) {
-	  	  				msg = msg + "You have more than one " + cart[Cartitem].name + " in you cart <br>";
-	  	  				
-	  	  		}
-		  });
-		  if (msg != ""){
-		  	showModal(msg)
-		  }
-		  else {
-		      $.post( "orders.php", { total: total, order:cart})
-		      .done(function( data ) {
-		      	showModal(data);
-		      	if(data != "Please Login To complete the order")
-		      	{
-		      		localStorage.clear();
-		      	}
-		      });
+			var boughtColors = JSON.parse(AllColordata);
+
+			if(AllColordata != "Please Login To complete the order") //error message give by the php file is checked before proceeding
+			{
+
+				$.post( "GameProfileColors.php", {all:true}) // gets a list of all colors in the database
+				.done(function( Colordata ) {
+
+					var allColors = JSON.parse(Colordata);
+					var total = $( "#total" ).val(); //gets total from hidden form element
+					var cart = JSON.parse(localStorage.getItem('cart'));
+
+					$( ".item-qty" ).each(function( index ) { // quantities are updated with the user inputs on teh checkout screen
+						var item_id = $(this).next().val(); // item_id obtian form hidden sibling element
+						cart[item_id].qty = $(this).val(); // item_id used as index to get the quantity that needs updating
+					});
+
+					var msg = "";  
+					$.each(cart, function(Cartitem) { // check the user hasn't already purchased a skin or has more than on of a particular skin
+						if(isItemIdInArray(allColors, cart[Cartitem].item_id)) { 
+							if(cart[Cartitem].qty > 1) { 
+								msg = msg + "You have more than one " + cart[Cartitem].name + " in you cart <br>";
+
+							}
+							if(isItemIdInArray(boughtColors, cart[Cartitem].item_id)) {
+								msg = msg + "You've already bought " + cart[Cartitem].name + " please remove from your basket to continue <br>";
+							}
+						}
+					});
+					if (msg != ""){
+
+						showModal(msg)
+
+					}
+					else {
+
+						$.post( "orders.php", { total: total, order:cart})
+						.done(function( data ) {
+							showModal(data);
+							localStorage.clear();
+						});
+
+					}
+
+				});
+			} else {
+				showModal(AllColordata);
 			}
-	    });
-  });
+		});
+
+	});
 
   $( "#close" ).click(function() {
    		location.reload();
   });
-
+  //takes in text and shows the modal with the text passed in
   function showModal(text){
   		$('#message').html(text);
 	    $('#message-modal').modal('show');
   }
+  // helper function to find if an item_id is in an array of objects
   function isItemIdInArray(array, item){
   	for(var i = 0; i < array.length; i++) {
   		if(array[i].item_id == item) {

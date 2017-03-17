@@ -30,17 +30,6 @@
 		$result = mysql_query($insert_order); 
 		$order_id = mysql_insert_id();
 
-		// $return_arr = array();
-
-		// while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		//     $row_array['item_id'] = $row['item_id'];
-		//     $row_array['name'] = $row['name'];
-		//     $row_array['price'] = $row['price'];
-		//     $row_array['image'] = $row['image'];
-
-
-		//     array_push($return_arr,$row_array);
-		// }
 		foreach ($cart as $key => $value) {
 			$item_id = $cart[$key]['item_id'];
 			$qty = $cart[$key]['qty'];
