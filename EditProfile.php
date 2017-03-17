@@ -1,5 +1,6 @@
 <?php
 
+//Includes the navigation bar for the site
 include("header.php");
 
  ?>
@@ -17,6 +18,8 @@ include("header.php");
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!--Including JQuery Datepicker-->
   <script>
   $( function() {
     $( "#datepicker" ).datepicker({ 
@@ -50,11 +53,16 @@ include("header.php");
 
         </div>
       </div>
+
+
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
 
         <h3>Personal info</h3>
+
+        <!--Creating the Edit Profile form, actioning includes/editProfile.php when submitted-->
+
         
         <form class="form-horizontal" method="post" action="includes/editProfile.php" id="editProfile-form">
           <div class="form-group">
@@ -379,7 +387,7 @@ include("header.php");
             <div class="col-lg-8">
 
               <select id="gameColor" name="gameColor">
-                <option value="#ecf0f1">Default</option>
+                <option value="0">Default</option>
               </select>
             </div>
           <div class="form-group">

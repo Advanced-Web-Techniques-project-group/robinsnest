@@ -6,54 +6,54 @@ require_once '../functions.php';
 
 //Validate username and password
 
-    $_SESSION['user'] = $_POST['user'];
-    $_SESSION['pass'] = $_POST['pass'];
+$_SESSION['user'] = $_POST['user'];
+$_SESSION['pass'] = $_POST['pass'];
 
-    $result = queryMysql("SELECT * FROM members WHERE user='$_SESSION[user]' && pass='$_SESSION[pass]'");
+//The databse is checked for  record containing the username and password the user entered.
 
-    $count = $result->num_rows;
+$result = queryMysql("SELECT * FROM members WHERE user='$_SESSION[user]' && pass='$_SESSION[pass]'");
 
-    if ($count==1){
+$count = $result->num_rows;
 
-    	//Run code to get all details from database for the user
-        $row = $result->fetch_array(MYSQLI_NUM);
+//If the count is = 1 a record has been found
+if ($count==1){
 
-        //UserID
-        $_SESSION['UserID'] = $row[0];
+    //Run code to get all details from database for the user, store in array $row
+    $row = $result->fetch_array(MYSQLI_NUM);
 
-    	//Username
-    	$_SESSION['user'] = $row[1];
-    	//First Name
-    	$_SESSION['firstName'] = $row[3];
-    	//Last Name
-    	$_SESSION['lastName'] = $row[4];
-    	//Gender
-    	$_SESSION['gender'] = $row[5];
-    	//Address 1
-    	$_SESSION['address1'] = $row[6];
-    	//Address 2
-    	$_SESSION['address2'] = $row[7];
-    	//Country
-    	$_SESSION['country'] = $row[8];
-    	//Postcode
-    	$_SESSION['postcode'] = $row[9];
-    	//DOB
-    	$_SESSION['DOB'] = $row[10];
-    	//Email
-    	$_SESSION['email'] = $row[11];
-    	//Phone
-    	$_SESSION['phone'] = $row[12];
+    //UserID
+    $_SESSION['UserID'] = $row[0];
+    //Username
+    $_SESSION['user'] = $row[1];
+    //First Name
+    $_SESSION['firstName'] = $row[3];
+    //Last Name
+    $_SESSION['lastName'] = $row[4];
+    //Gender
+    $_SESSION['gender'] = $row[5];
+    //Address 1
+    $_SESSION['address1'] = $row[6];
+    //Address 2
+    $_SESSION['address2'] = $row[7];
+    //Country
+    $_SESSION['country'] = $row[8];
+    //Postcode
+    $_SESSION['postcode'] = $row[9];
+    //DOB
+    $_SESSION['DOB'] = $row[10];
+    //Email
+    $_SESSION['email'] = $row[11];
+    //Phone
+    $_SESSION['phone'] = $row[12];
 
-    	//put these details in to profile page.
-    	//head to profile page
+    //Head to the members page when this is complete.
+    header('Location: ../members.php');
+}
 
-    	header('Location: ../members.php');
-    }
+else
+{
+   echo("Incorrect Details");
 
-    else
-    {
-    	echo("Incorrect Details");
-
-    }
+}
 
 ?>

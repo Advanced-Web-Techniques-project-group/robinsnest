@@ -4,16 +4,16 @@ session_start();
 
 include("header.php");
 
-
+// Gets the user idea of the user logged in
 $user = $_SESSION["user"];
 
+//Uses this user id to select the data about the user from the members table
 $query=queryMysql("SELECT * FROM members WHERE user='$user'");
 
+//Sotres this data in an array
 $row=mysqli_fetch_array($query,MYSQLI_NUM);
 
-
-
- ?>
+?>
 
 <!doctype html>
 
@@ -24,40 +24,39 @@ $row=mysqli_fetch_array($query,MYSQLI_NUM);
   <title>Profile</title>
 
   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="css/Profile.css">
-<link rel="stylesheet" href="css/Bootstrap.css">
- <script src="https://use.fontawesome.com/9d20d68da5.js"></script>
+  <link rel="stylesheet" href="css/Profile.css">
+  <link rel="stylesheet" href="css/Bootstrap.css">
+  <script src="https://use.fontawesome.com/9d20d68da5.js"></script>
 </head>
 
-
 <body>
-<div class="container">
-      <div class="row">
+  <div class="container">
+    <div class="row">
       <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-           <i class="fa fa-sign-out" aria-hidden="true"></i> <A href="#">Logout</A>
-
+       <i class="fa fa-sign-out" aria-hidden="true"></i> <A href="#">Logout</A>
        <br>
-      </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-   
-   
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title"><?php echo $_SESSION['user']?></h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="//placehold.it/100" class="img-circle img-responsive"> </div>
-                
+     </div>
+     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            
+      <div class="panel panel-info">
+        <div class="panel-heading">
+
+          <!--Echos the username of the user-->
+          <h3 class="panel-title"><?php echo $_SESSION['user']?></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="//placehold.it/100" class="img-circle img-responsive"> </div>
+            
+                <!--Array stored in $row is then accsessd at different points to display
+                the different information for that user-->
                 <div class=" col-md-9 col-lg-9 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td><font color="#31708f">Address Line 1:</font></td>
                         <td><?php 
-
                         echo $row[6]
-
                         ?></td>
                       </tr>
                       <tr>
@@ -75,10 +74,9 @@ $row=mysqli_fetch_array($query,MYSQLI_NUM);
                       <tr>
                         <td><font color="#31708f">Date of Birth</font></td>
                         <td><?php echo $row[10]?></td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
+                      </tr>               
+                      <tr>
+                       <tr>
                         <td><font color="#31708f">Gender</font></td>
                         <td><?php echo $row[5]?></td>
                       </tr>
@@ -94,33 +92,29 @@ $row=mysqli_fetch_array($query,MYSQLI_NUM);
                         <td><font color="#31708f">Phone Number:</font>:</td>
                         <td><?php echo $row[12]?>
                         </td>
-                      </tr>
-
-                           
-                      </tr>
-                     
-                    </tbody>
-                  </table>
-                  
-                  <a href="game.php" class="btn btn-primary">View Game Highscores</a>
-                  <span class="pull-right">
+                      </tr>                      
+                    </tr>                   
+                  </tbody>
+                </table>
+                
+                <a href="game.php" class="btn btn-primary">View Game Highscores</a>
+                <span class="pull-right">
                   <a href="store.php#!/checkout" class="btn btn-primary">View Shopping Cart</a>
                 </span>
-                </div>
               </div>
             </div>
-                 <div class="panel-footer">
-
-
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a>
-                        <span class="pull-right">
-                            <a href="EditProfile.php" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile</a>
-                        </span>
-                    </div>
-            
           </div>
+          <div class="panel-footer">
+
+            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="fa fa-envelope" aria-hidden="true"></i> Messages</a>
+            <span class="pull-right">
+              <a href="EditProfile.php" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Profile</a>
+            </span>
+          </div>
+          
         </div>
       </div>
     </div>
-  </body>
-  </html>
+  </div>
+</body>
+</html>

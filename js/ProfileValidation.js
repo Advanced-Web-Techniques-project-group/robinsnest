@@ -1,5 +1,6 @@
 $(function() {
 
+	//Sets the colour of the HTML elements to red if an error and back to normal if there is no error
 	$.validator.setDefaults({
 
 		errorClass: 'help-block',
@@ -17,14 +18,10 @@ $(function() {
 			.closest('.form-group')
 			.removeClass('has-error');
 		}
-
-
-
-
 	});
 
-
-
+	// Declares a custom methos which checks that the password is at least 6 characters
+	// long and includes at least one number and one character
 	$.validator.addMethod('strongPassword', function(value, element){
 
 		return this.optional(element)
@@ -33,24 +30,17 @@ $(function() {
 		&& /[a-z]/i.test(value);
 
 	}, 'Your Password must be at least 6 characters long and contain at least one number and one char\'.' 
-		)
+	)
 
+	//Declares a new method for a valid phone number 
 	$.validator.addMethod('customphone', function (value, element) {
 		return this.optional(element) || /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(value);
 	}, "Please enter a valid phone number")
 
-	$.validator.addMethod("DOB", function (value, element) {
-        var year = value.split('/');
-        if ( value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/) && parseInt(year[2]) )
-            return true;
-        else
-            return false;
-    });
-
-
+	//Targets the form with the ID editProfile-form
 	$("#editProfile-form").validate(
 	{
-
+		//Sets rules so that the data is of a valid format for each indivdual piece of data entered.
 		rules:{
 			email:{
 				email: true
@@ -60,7 +50,6 @@ $(function() {
 				strongPassword: true
 
 			},
-
 
 			confirm: {
 				equalTo: "#password"
@@ -76,10 +65,9 @@ $(function() {
 				
 			},
 
-
-
 		},
 
+		//Messages for the relevant validation are displayed if an error occurs.
 		messages: {
 
 			email:{
@@ -96,8 +84,5 @@ $(function() {
 
 		}
 
-
-		});
-
-
+	});
 });

@@ -1,7 +1,7 @@
 $(function() {
 
-
-$.validator.setDefaults({
+	//Sets the colour of the HTML elements to red if an error and back to normal if there is no error
+	$.validator.setDefaults({
 
 		errorClass: 'help-block',
 
@@ -19,33 +19,25 @@ $.validator.setDefaults({
 			.removeClass('has-error');
 		}
 
+	});
 
+	//Targets the form with the ID of login-form
+	$("#login-form").validate({
 
-});
+		//Sets rules for the username and password to both be required
+		rules:{
 
-$("#login-form").validate({
+			user:{
 
-	rules:{
+				required: true
 
-		user:{
+			},
 
-			required: true
-
-
-		},
-
-		pass:{
+			pass:{
 				required: true
 
 			}
-	}
+		}
 
-
-
-});
-
-
-
-
-
+	});
 });
