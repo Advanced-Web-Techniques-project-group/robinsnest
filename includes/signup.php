@@ -38,7 +38,8 @@ else
     $result = queryMysql($sql);
 
         //Head to Profile Page
-  echo ("<h4>Account created</h4><a href='../login.html'>Please Log in</a><br><br>");
+
+header("Location: ../AccountCreated.php");
 
 }
 

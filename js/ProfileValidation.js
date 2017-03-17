@@ -56,7 +56,7 @@ $(function() {
 				email: true
 			},
 
-			password:{
+			pass:{
 				strongPassword: true
 
 			},

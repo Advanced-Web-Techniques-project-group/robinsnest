@@ -38,7 +38,8 @@ $sql= "UPDATE members SET user=IF(LENGTH('$_SESSION[Newuser]')=0, user, '$_SESSI
 
 queryMysql($sql);
 
-echo("Complete");
+
+header("Location: ../EditComplete.php");
 
 if ($_POST['Newuser'] != "") {
     $_SESSION['user'] = $_POST['Newuser'];
